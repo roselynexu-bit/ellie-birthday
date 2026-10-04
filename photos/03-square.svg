@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="900" viewBox="0 0 900 900">
+<defs>
+  <linearGradient id="sky" x1="0" y1="0" x2="0.15" y2="1">
+    <stop offset="0" stop-color="#5c6250"/>
+    <stop offset="0.62" stop-color="#d6cba8"/>
+    <stop offset="1" stop-color="#e8dcb4"/>
+  </linearGradient>
+  <radialGradient id="sun" cx="0.5" cy="0.5" r="0.5">
+    <stop offset="0" stop-color="#e8dcb4" stop-opacity="0.95"/>
+    <stop offset="0.45" stop-color="#e8dcb4" stop-opacity="0.35"/>
+    <stop offset="1" stop-color="#e8dcb4" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#2f3129" stop-opacity="0"/>
+    <stop offset="1" stop-color="#2f3129" stop-opacity="0.55"/>
+  </linearGradient>
+  <radialGradient id="vig" cx="0.5" cy="0.48" r="0.78">
+    <stop offset="0.55" stop-color="#000" stop-opacity="0"/>
+    <stop offset="1" stop-color="#1a1410" stop-opacity="0.42"/>
+  </radialGradient>
+  <filter id="grain" x="0" y="0" width="100%" height="100%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" seed="31" stitchTiles="stitch"/>
+    <feColorMatrix type="saturate" values="0"/>
+    <feComponentTransfer><feFuncA type="linear" slope="0.5" intercept="0"/></feComponentTransfer>
+  </filter>
+  <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+    <feGaussianBlur stdDeviation="12"/>
+  </filter>
+  <filter id="softbig" x="-40%" y="-40%" width="180%" height="180%">
+    <feGaussianBlur stdDeviation="28.799999999999997"/>
+  </filter></defs>
+
+    <rect width="900" height="900" fill="url(#sky)"/>
+    <rect x="54" y="90" width="180" height="558" fill="#7d7c5e" opacity="0.5" filter="url(#soft)"/>
+    <rect x="684" y="36" width="216" height="630" fill="#2f3129" opacity="0.35" filter="url(#soft)"/>
+    <rect x="324" y="270" width="108" height="378" fill="#2f3129" opacity="0.3" filter="url(#soft)"/>
+    <circle cx="270" cy="180" r="306" fill="url(#sun)"/>
+    <rect x="0" y="666" width="900" height="234" fill="#2f3129" opacity="0.55" filter="url(#soft)"/>
+    <g opacity="0.16" fill="#e8dcb4">
+      <rect x="144" y="144" width="40.5" height="45"/><rect x="306" y="234" width="40.5" height="45"/><rect x="468" y="144" width="40.5" height="45"/><rect x="630" y="234" width="40.5" height="45"/><rect x="792" y="144" width="40.5" height="45"/>
+    </g>
+<rect width="900" height="900" fill="url(#fade)" opacity="0.5"/>
+<rect width="900" height="900" fill="url(#vig)"/>
+<rect width="900" height="900" filter="url(#grain)" opacity="0.3" style="mix-blend-mode:overlay"/>
+<g font-family="Helvetica,Arial,sans-serif" font-size="29" fill="#f6efe2" opacity="0.5" letter-spacing="2">02A</g>
+</svg>
