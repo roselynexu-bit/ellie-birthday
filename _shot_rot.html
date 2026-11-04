@@ -1,0 +1,42 @@
+<!doctype html><meta charset=utf-8>
+<style>html,body{margin:0;height:100%}iframe{border:0;width:100vw;height:100vh;display:block}</style>
+<iframe id="f" src="index.html?fresh=2#globe-scene"></iframe>
+<pre id="out" style="position:fixed;top:0;left:0;background:#fff;color:#000;z-index:99;font-size:12px;margin:0">PENDING</pre>
+<script>
+var f = document.getElementById('f');
+f.addEventListener('load', function(){
+  setTimeout(function(){
+    var w = f.contentWindow, d = w.document;
+    w.requestAnimationFrame = function(cb){ return setTimeout(function(){ cb(performance.now()); }, 16); };
+    w.dispatchEvent(new w.KeyboardEvent('keydown', { key: 'Escape' }));
+    setTimeout(function(){
+      var svg = d.querySelector('#globe-scene svg');
+      var lc = d.getElementById('landCont');
+      var out = [];
+      out.push('title=' + d.title);
+      out.push('pd=' + JSON.stringify(w.__pdLog) + ' pm=' + JSON.stringify(w.__pmLog));
+      out.push('d0=' + lc.getAttribute('d').length);
+      function pe(type, x, y){ return new w.PointerEvent(type, { bubbles: true, clientX: x, clientY: y, button: 0, pointerId: 1 }); }
+      svg.dispatchEvent(pe('pointerdown', 700, 450));
+      for (var i = 1; i <= 10; i++) svg.dispatchEvent(pe('pointermove', 700 + i * 30, 450 - i * 8));
+      setTimeout(function(){
+        out.push('d1=' + lc.getAttribute('d').length);
+        out.push('rotated=' + svg.classList.contains('rotated'));
+        var sh = d.querySelector('.city-star[data-id="shanghai"]');
+        out.push('shanghai=' + sh.getAttribute('transform'));
+        out.push('grid=' + w.getComputedStyle(d.querySelector('.geo-grid')).opacity);
+        // rotate China to the back
+        svg.dispatchEvent(pe('pointerup', 1000, 370));
+        svg.dispatchEvent(pe('pointerdown', 700, 450));
+        for (var j = 1; j <= 12; j++) svg.dispatchEvent(pe('pointermove', 700 - j * 40, 450));
+        setTimeout(function(){
+          out.push('chinaBehind=[' + sh.style.opacity + ']');
+          var ln = d.querySelector('.city-star[data-id="london"]');
+          out.push('london=' + ln.getAttribute('transform'));
+          document.getElementById('out').textContent = 'RESULTS\n' + out.join('\n');
+        }, 400);
+      }, 400);
+    }, 1200);
+  }, 400);
+});
+</script>

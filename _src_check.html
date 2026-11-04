@@ -1,0 +1,15 @@
+<!doctype html><meta charset=utf-8>
+<iframe id="f" src="index.html?cmp=3#globe-scene"></iframe>
+<pre id="out">PENDING</pre>
+<script>
+var f = document.getElementById('f');
+f.addEventListener('load', function(){
+  setTimeout(function(){
+    var w = f.contentWindow, d = w.document;
+    var svg = d.querySelector('#globe-scene svg');
+    document.getElementById('out').textContent = 'RESULTS\nsameEl=' + (w.__boundTag === svg) +
+      '\nbound=' + (w.__boundTag && w.__boundTag.tagName) +
+      '\nsvgCount=' + d.querySelectorAll('#globe-scene svg').length;
+  }, 1000);
+});
+</script>
