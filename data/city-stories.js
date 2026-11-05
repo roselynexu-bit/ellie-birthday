@@ -9,9 +9,9 @@ window.ELLIE_DATA.cityStories = {
   'hong-kong': { coverImage: 'assets/cities/hong-kong/photos/03.JPG', date: '', shortTitle: '', title: '', body: '', ending: '' },
   suzhou:      { coverImage: 'assets/cities/suzhou/photos/02.JPG', date: '', shortTitle: '', title: '', body: '', ending: '' },
   taizhou:     { coverImage: 'assets/cities/taizhou/photos/04.JPG', date: '', shortTitle: '', title: '', body: '', ending: '' },
-  beijing:     { coverImage: 'assets/cities/beijing/photos/03.JPG', date: '', shortTitle: '', title: '', body: '', ending: '' },
+  beijing:     { coverImage: 'assets/cities/beijing/photos/03.web.jpg', date: '', shortTitle: '', title: '', body: '', ending: '' },
   hangzhou:    { coverImage: 'assets/cities/hangzhou/photos/01.JPG', date: '', shortTitle: '', title: '', body: '', ending: '' },
   wuxi:        { coverImage: 'assets/cities/wuxi/photos/01.jpg', date: '', shortTitle: '', title: '', body: '', ending: '' },
-  macau:       { coverImage: 'assets/cities/macau/photos/08.JPG', date: '', shortTitle: '', title: '', body: '', ending: '' },
-  london:      { coverImage: 'assets/cities/london/photos/01.JPG', date: '', shortTitle: '', title: '', body: '', ending: '' }
+  macau:       { coverImage: 'assets/cities/macau/photos/08.web.jpg', date: '', shortTitle: '', title: '', body: '', ending: '' },
+  london:      { coverImage: 'assets/cities/london/photos/01.web.jpg', date: '', shortTitle: '', title: '', body: '', ending: '' }
 };
