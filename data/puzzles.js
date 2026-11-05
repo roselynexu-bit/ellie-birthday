@@ -111,7 +111,7 @@ window.ELLIE_DATA.puzzles = {
       { id: 'wrong-1', image: 'assets/games/puzzle/无锡小分队错1.JPG' },
       { id: 'correct', image: 'assets/games/puzzle/无锡小分队正确答案.JPG' },
       { id: 'wrong-2', image: 'assets/games/puzzle/无锡小分队错2.JPG' },
-      { id: 'wrong-3', image: 'assets/games/puzzle/无锡小分队错3.heic' }
+      { id: 'wrong-3', image: 'assets/games/puzzle/无锡小分队错3.web.jpg' }
     ],
     correctOption: 'correct',
     successMessage: '找到正确的无锡小分队了！'
