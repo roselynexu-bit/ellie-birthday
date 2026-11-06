@@ -4027,11 +4027,25 @@ body.letter-farewell-open .vinyl-player { z-index: 140; }
 
   function play(){
     wantsPlay = true; started = true;
+    if (isLetterVideoActive()){
+      if (letterVideoEl.paused){
+        var letterPromise = letterVideoEl.play();
+        if (letterPromise && letterPromise.catch) letterPromise.catch(function(){});
+      }
+      return;
+    }
     if (videoMusicIsHeld()){ resumeMusicAfterVideo = true; return; }
     var p = audio.play();
     if (p && p.catch) p.catch(function(){});
   }
-  function pause(){ wantsPlay = false; audio.pause(); }
+  function pause(){
+    wantsPlay = false;
+    if (isLetterVideoActive()){
+      letterVideoEl.pause();
+      return;
+    }
+    audio.pause();
+  }
 
   function loadSong(i, opts){
     var pl = playlist();
@@ -4062,6 +4076,8 @@ body.letter-farewell-open .vinyl-player { z-index: 140; }
     loadSong(want === -1 ? 0 : want, { autoplay: true });
   }
   function setMusicContext(ctx){
+    /* Keep the Easter egg song and its paused state while the user changes apps. */
+    if (isLetterVideoActive()) return;
     var current = currentSong();
     var currentMatches = current && (ctx === 'main' ? !current.city : current.city === ctx);
     if (musicContext === ctx && currentMatches) return;
@@ -4142,10 +4158,7 @@ body.letter-farewell-open .vinyl-player { z-index: 140; }
 
   vpPlayBtn.addEventListener('click', function(){
     if (isLetterVideoActive()){
-      if (letterVideoEl.paused){
-        var letterPlayPromise = letterVideoEl.play();
-        if (letterPlayPromise && letterPlayPromise.catch) letterPlayPromise.catch(function(){});
-      } else letterVideoEl.pause();
+      if (letterVideoEl.paused) play(); else pause();
       syncLetterVinylPlayer();
       return;
     }
@@ -4257,6 +4270,7 @@ body.letter-farewell-open .vinyl-player { z-index: 140; }
         var src = (musicConf.videoSrc || '').trim();
         if (!src) return;
         if (letterVideoHandoffActive && !letterVideoEl.paused){
+          wantsPlay = false;
           letterVideoEl.pause();
           syncLetterVinylPlayer();
           renderMusic();
@@ -5583,10 +5597,7 @@ body.letter-farewell-open .vinyl-player { z-index: 140; }
       letterVideoHandoffActive = true;
       letterVideoEl.loop = false;
       hideLetterVideo();
-      if (letterVideoEl.paused){
-        var continuePromise = letterVideoEl.play();
-        if (continuePromise && continuePromise.catch) continuePromise.catch(function(){});
-      }
+      if (letterVideoEl.paused && wantsPlay) play();
       syncLetterVinylPlayer();
     } else if (!letterVideoHandoffActive){
       stopLetterMusic();
@@ -5675,11 +5686,10 @@ body.letter-farewell-open .vinyl-player { z-index: 140; }
       e.stopPropagation();
       if (!letterVideoEl || !letterVideoEl.getAttribute('src')) return;
       if (letterVideoEl.paused){
-        letterVideoEl.play().then(function(){
-          letterMusicBtnEl.textContent = '❚❚';
-        });
+        play();
+        letterMusicBtnEl.textContent = '❚❚';
       } else {
-        letterVideoEl.pause();
+        pause();
         letterMusicBtnEl.textContent = '▶';
       }
     });
